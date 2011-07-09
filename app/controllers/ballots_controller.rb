@@ -27,8 +27,15 @@ class BallotsController < ApplicationController
   def new
     @survey = Survey.find(params[:survey_id])
     
-    @ballot = Ballot.new
-    @ballot.survey = @survey
+    @ballot = @survey.ballots.build
+    
+    # Prepare the ballot
+    for question in @ballot.survey.questions
+      p = Preference.new
+      p.ballot = @ballot
+      p.question = question
+      @ballot.preferences << p
+    end
     
     respond_to do |format|
       format.html # new.html.erb

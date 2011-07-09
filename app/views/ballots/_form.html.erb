@@ -1,21 +1,16 @@
-<%= form_for(@ballot.survey) do |f| %>
-  <% if @ballot.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@ballot.errors.count, "error") %> prohibited this survey from being saved:</h2>
-
-      <ul>
-      <% @ballot.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <%= f.fields_for :questions do |question_form| %>
-    <%= question_form.text_field :question %>
+<%= form_for [@survey, @ballot] do |f| %>
+  <%= f.fields_for :preferences do |preference_form| %>
+    <%= preference_form.fields_for :question do |question_form| %>
+      <p>
+	    <%= question_form.label :question %><br />
+	    <%= radio_button("preference", "preference", "Yes") %> Yes
+	    <%= radio_button("preference", "preference", "No") %> No
+	    <%= radio_button("preference", "preference", "Decline") %> Decline
+      </p>
+    <% end %>
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Vote" %>
   </div>
 <% end %>
