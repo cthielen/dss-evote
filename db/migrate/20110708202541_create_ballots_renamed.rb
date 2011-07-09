@@ -1,4 +1,4 @@
-class CreateBallots < ActiveRecord::Migration
+class CreateBallotsRenamed < ActiveRecord::Migration
   def self.up
     create_table :ballots do |t|
       t.boolean :status
