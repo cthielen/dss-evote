@@ -1,5 +1,7 @@
 DssEvote::Application.routes.draw do
-  resources :surveys
+  resources :surveys do
+    resources :ballots
+  end
 
   get "site/index"
 

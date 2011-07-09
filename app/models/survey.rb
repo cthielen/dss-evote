@@ -1,6 +1,7 @@
 class Survey < ActiveRecord::Base
   has_many :questions
   has_many :eligibilities
+  has_many :ballots
 
   accepts_nested_attributes_for :questions, :allow_destroy => true
   
