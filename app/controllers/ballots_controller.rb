@@ -28,9 +28,10 @@ class BallotsController < ApplicationController
     @survey = Survey.find(params[:survey_id])
     
     @ballot = @survey.ballots.build
+    #@ballot.preferences = @survey.questions.build_preferences
     
     # Prepare the ballot
-    #@ballot.preferences = @survey.questions.map{|question| question.preferences.build}
+    @ballot.preferences = @survey.questions.map{|question| question.preferences.build}
     #for question in @ballot.survey.questions
     #  p = Preference.new
     #  p.ballot = @ballot
