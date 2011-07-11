@@ -28,20 +28,11 @@ class BallotsController < ApplicationController
     @survey = Survey.find(params[:survey_id])
     
     @ballot = @survey.ballots.build
-    #@ballot.preferences = @survey.questions.build_preferences
     
-    # Prepare the ballot
-    @ballot.preferences = @survey.questions.map{|question| question.preferences.build}
-    #for question in @ballot.survey.questions
-    #  p = Preference.new
-    #  p.ballot = @ballot
-    #  p.question = question
-    #  @ballot.preferences << p
-    #end
+    @survey.questions.count.times { @ballot.preferences.build }
     
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @ballot }
     end
   end
 
