@@ -30,12 +30,13 @@ class BallotsController < ApplicationController
     @ballot = @survey.ballots.build
     
     # Prepare the ballot
-    for question in @ballot.survey.questions
-      p = Preference.new
-      p.ballot = @ballot
-      p.question = question
-      @ballot.preferences << p
-    end
+    #@ballot.preferences = @survey.questions.map{|question| question.preferences.build}
+    #for question in @ballot.survey.questions
+    #  p = Preference.new
+    #  p.ballot = @ballot
+    #  p.question = question
+    #  @ballot.preferences << p
+    #end
     
     respond_to do |format|
       format.html # new.html.erb
@@ -51,15 +52,15 @@ class BallotsController < ApplicationController
   # POST /ballots
   # POST /ballots.xml
   def create
-    @ballot = Ballot.new(params[:ballot])
+    @survey = Survey.find_by_id(params[:survey_id])
+    @ballot = @survey.ballots.build(params[:ballot])
 
     respond_to do |format|
       if @ballot.save
-        format.html { redirect_to(@ballot, :notice => 'Ballot was successfully created.') }
-        format.xml  { render :xml => @ballot, :status => :created, :location => @ballot }
+        flash[:notice] = "Ballot was successfully created."
+        format.html { redirect_to survey_url(@ballot.survey_id) }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @ballot.errors, :status => :unprocessable_entity }
       end
     end
   end
