@@ -1,46 +1,58 @@
 <p id="notice"><%= notice %></p>
 
-<h3><%= @survey.title %></h3>
+<div class="block">
+	<div class="block_head">
+		<div class="bheadl"></div>
+		<div class="bheadr"></div>
+		
+		<h2><%= @survey.title %></h2>
+	</div> <!-- .block_head -->
+	
+	<div class="block_content" id="overview_tab">
+		<p>
+		  <i><%= @survey.description %></i>
+		</p>
 
-<p>
-  <i><%= @survey.description %></i>
-</p>
+		<p>
+		  <b>Status:</b>
+		  <% if @survey.status == true %>
+		    Active
+		  <% else %>
+		    Inactive
+		  <% end %>
+		</p>
 
-<p>
-  <b>Status:</b>
-  <% if @survey.status == true %>
-    Active
-  <% else %>
-    Inactive
-  <% end %>
-</p>
+		<p>
+		  <b>Deadline:</b>
+		  <%= @survey.deadline %>
+		</p>
 
-<p>
-  <b>Deadline:</b>
-  <%= @survey.deadline %>
-</p>
+		<p>
+		  <b>Questions:</b>
+		  <ul>
+			<% for question in @survey.questions %>
+			  <li><%= question.question %></li>
+			  <% if @results.count > 0 %>
+			  <ul>
+			    <li>Yes Votes: <%= @results[question.id][1] %></li>
+			    <li>No Votes: <%= @results[question.id][0] %></li>
+			    <li>Decline Votes: <%= @results[question.id][-1] %></li>
+			  </ul>
+			  <% else %>
+			    <ul><li>No results reported yet.</li></ul>
+			  <% end %>
+			<% end %>
+		  </ul>
+		</p>
 
-<p>
-  <b>Questions:</b>
-  <ul>
-	<% for question in @survey.questions %>
-	  <li><%= question.question %></li>
-	  <% if @results.count > 0 %>
-	  <ul>
-	    <li>Yes Votes: <%= @results[question.id][1] %></li>
-	    <li>No Votes: <%= @results[question.id][0] %></li>
-	    <li>Decline Votes: <%= @results[question.id][-1] %></li>
-	  </ul>
-	  <% else %>
-	    <ul><li>No results reported yet.</li></ul>
-	  <% end %>
-	<% end %>
-  </ul>
-</p>
+		<p>
+			<b>Ballots completed</b>: <%= @survey.ballots.count %>
+		</p>
 
-<p>
-	<b>Ballots completed</b>: <%= @survey.ballots.count %>
-</p>
-
-<%= link_to 'Edit', edit_survey_path(@survey) %> |
-<%= link_to 'Back', surveys_path %>
+		<%= link_to 'Edit', edit_survey_path(@survey) %> |
+		<%= link_to 'Back', surveys_path %>
+	</div> <!-- .block_content -->
+	
+	<div class="bendl"></div>
+	<div class="bendr"></div>
+</div> <!-- .block -->

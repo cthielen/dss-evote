@@ -32,6 +32,7 @@
 	<%= javascript_include_tag "ajaxupload.js" %>
 	<%= javascript_include_tag "jquery.pngfix.js" %>
 	<%= javascript_include_tag "custom.js" %>
+	<%= javascript_include_tag "nested_form.js" %>
 </head>
 <body>
 	<div id="hld">
@@ -56,7 +57,7 @@
 					<% end %>
 						<ul>
 							<li><%= link_to "View All", surveys_path %></li>
-							<li><%= link_to 'Create New User', new_survey_path %></li>
+							<li><%= link_to 'Create New Survey', new_survey_path %></li>
 						</ul>
 					</li>
 				</ul>
