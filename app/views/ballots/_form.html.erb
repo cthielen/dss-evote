@@ -1,7 +1,8 @@
 <%= form_for [@survey, @ballot] do |f| %>
   <%= f.fields_for :preferences do |preferences_fields| %>
     <p>
-	  <%= preferences_fields.label questions %>
+	  <%= preferences_fields.object.question.question %>
+	  
 	  <%= radio_button(question.id, "preference", "Yes") %> Yes
 	  <%= radio_button(question.id, "preference", "No") %> No
 	  <%= radio_button(question.id, "preference", "Decline") %> Decline

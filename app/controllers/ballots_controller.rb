@@ -29,7 +29,10 @@ class BallotsController < ApplicationController
     
     @ballot = @survey.ballots.build
     
-    @survey.questions.count.times { @ballot.preferences.build }
+    #@survey.questions.count.times { @ballot.preferences.build }
+    @survey.questions.each do |q|
+      @ballot.preferences.build(:question_id => q.id)
+    end
     
     respond_to do |format|
       format.html # new.html.erb
