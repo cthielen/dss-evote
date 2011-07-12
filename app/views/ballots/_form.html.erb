@@ -3,9 +3,9 @@
     <p>
 	  <%= preferences_fields.object.question.question %>
 	  
-	  <%= radio_button(question.id, "preference", "Yes") %> Yes
-	  <%= radio_button(question.id, "preference", "No") %> No
-	  <%= radio_button(question.id, "preference", "Decline") %> Decline
+	  <%= preferences_fields.radio_button :preference, 1 %> Yes
+	  <%= preferences_fields.radio_button :preference, 0 %> No
+	  <%= preferences_fields.radio_button :preference, -1 %> Decline
 	</p>
   <% end %>
 
