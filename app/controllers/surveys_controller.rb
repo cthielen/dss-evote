@@ -15,6 +15,28 @@ class SurveysController < ApplicationController
   def show
     @survey = Survey.find(params[:id])
 
+    # @results[question_id][preference_type] (1 = yes, 0 = no, -1 = decline as per views/ballots/_form.html.erb)
+    @results = Array.new
+
+    # TODO: There's a better way to do this
+    @survey.ballots.each { |b|
+      b.preferences.each { |p|
+        if @results[p.question.id] == nil
+          @results[p.question.id] = Hash.new
+        end
+        if @results[p.question.id][-1] == nil
+          @results[p.question.id][-1] = 0
+        end
+        if @results[p.question.id][1] == nil
+          @results[p.question.id][1] = 0
+        end
+        if @results[p.question.id][0] == nil
+          @results[p.question.id][0] = 0
+        end
+        @results[p.question.id][p.preference] = @results[p.question.id][p.preference] + 1
+      }
+    }
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @survey }

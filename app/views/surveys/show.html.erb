@@ -1,13 +1,18 @@
 <p id="notice"><%= notice %></p>
 
+<h3><%= @survey.title %></h3>
+
 <p>
-  <b>Description:</b>
-  <%= @survey.description %>
+  <i><%= @survey.description %></i>
 </p>
 
 <p>
   <b>Status:</b>
-  <%= @survey.status %>
+  <% if @survey.status == true %>
+    Active
+  <% else %>
+    Inactive
+  <% end %>
 </p>
 
 <p>
@@ -20,8 +25,21 @@
   <ul>
 	<% for question in @survey.questions %>
 	  <li><%= question.question %></li>
+	  <% if @results.count > 0 %>
+	  <ul>
+	    <li>Yes Votes: <%= @results[question.id][1] %></li>
+	    <li>No Votes: <%= @results[question.id][0] %></li>
+	    <li>Decline Votes: <%= @results[question.id][-1] %></li>
+	  </ul>
+	  <% else %>
+	    <ul><li>No results reported yet.</li></ul>
+	  <% end %>
 	<% end %>
   </ul>
+</p>
+
+<p>
+	<b>Ballots completed</b>: <%= @survey.ballots.count %>
 </p>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |

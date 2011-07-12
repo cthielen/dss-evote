@@ -49,6 +49,8 @@ class BallotsController < ApplicationController
   def create
     @survey = Survey.find_by_id(params[:survey_id])
     @ballot = @survey.ballots.build(params[:ballot])
+    
+    @ballot.submitted_on = DateTime.now
 
     respond_to do |format|
       if @ballot.save

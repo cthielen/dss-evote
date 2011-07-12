@@ -3,6 +3,7 @@
     <p>
 	  <%= preferences_fields.object.question.question %>
 	  
+	  <%= preferences_fields.hidden_field :question_id, :value => preferences_fields.object.question.id %>
 	  <%= preferences_fields.radio_button :preference, 1 %> Yes
 	  <%= preferences_fields.radio_button :preference, 0 %> No
 	  <%= preferences_fields.radio_button :preference, -1 %> Decline
