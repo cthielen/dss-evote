@@ -11,11 +11,13 @@ class ApplicationController < ActionController::Base
         return true
       rescue Exception => e
         # User not found
+        flash[:warning] = 'You have authenticated but are not in the database.'
         @@user = nil
       end
+    else
+      flash[:warning] = 'You must authenticate with CAS to continue.'
     end
     
-    flash[:warning] = 'You must authenticate with CAS to continue'
     session[:return_to] = request.request_uri
     
     redirect_to :controller => "site", :action => "index"

@@ -1,29 +1,43 @@
-<h1>Listing surveys</h1>
+<p id="notice"><%= notice %></p>
 
-<table>
-  <tr>
-	<th>Description</th>
-    <th>Status</th>
-    <th>Deadline</th>
-    <th>No. Questions</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<div class="block">
+	<div class="block_head">
+		<div class="bheadl"></div>
+		<div class="bheadr"></div>
+		
+		<h2>Available Surveys</h2>
+	</div> <!-- .block_head -->
+	
+	<div class="block_content" id="overview_tab">
+		<table>
+		  <tr>
+			<th>Description</th>
+		    <th>Status</th>
+		    <th>Deadline</th>
+		    <th>No. Questions</th>
+		    <th></th>
+		    <th></th>
+		    <th></th>
+		  </tr>
 
-<% @surveys.each do |survey| %>
-  <tr>
-	<td><%= survey.description %></td>
-    <td><%= survey.status %></td>
-    <td><%= survey.deadline %></td>
-    <td><%= survey.questions.count %></td>
-    <td><%= link_to 'Show', survey %></td>
-    <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-    <td><%= link_to 'Destroy', survey, :confirm => 'Are you sure?', :method => :delete %></td>
-  </tr>
-<% end %>
-</table>
+		<% @surveys.each do |survey| %>
+		  <tr>
+			<td><%= survey.description %></td>
+		    <td><%= survey.status %></td>
+		    <td><%= survey.deadline %></td>
+		    <td><%= survey.questions.count %></td>
+		    <td><%= link_to 'Show', survey %></td>
+		    <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
+		    <td><%= link_to 'Destroy', survey, :confirm => 'Are you sure?', :method => :delete %></td>
+		  </tr>
+		<% end %>
+		</table>
 
-<br />
+		<br />
 
-<%= link_to 'New Survey', new_survey_path %>
+		<%= link_to 'New Survey', new_survey_path %>
+	</div> <!-- .block_content -->
+	
+	<div class="bendl"></div>
+	<div class="bendr"></div>
+</div> <!-- .block -->

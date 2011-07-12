@@ -6,6 +6,8 @@ DssEvote::Application.routes.draw do
   get "site/index"
 
   get "site/contact"
+  
+  get "site/logout"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
