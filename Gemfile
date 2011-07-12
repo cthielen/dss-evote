@@ -31,3 +31,4 @@ gem 'sqlite3'
 # end
 
 gem "nested_form"
+gem "rubycas-client"
